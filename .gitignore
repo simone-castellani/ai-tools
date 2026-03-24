@@ -1,0 +1,3 @@
+# Directories created by the install script when run with --scope project
+.opencode/
+.claude/
