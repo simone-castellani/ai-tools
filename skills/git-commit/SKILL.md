@@ -1,3 +1,10 @@
+---
+name: git-commit
+description: Write clear, informative Git commit messages that follow the Conventional Commits specification and the project's existing conventions. Use when crafting commit messages for staged changes.
+license: MIT
+allowed-tools: Bash
+---
+
 # Git Commit Message Skill
 
 Write clear, informative Git commit messages that follow the Conventional Commits specification and the project's existing conventions.
