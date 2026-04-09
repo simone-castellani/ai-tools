@@ -1,0 +1,17 @@
+{
+  "skill_name": "msg-to-markdown",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Convert this Outlook message (attached as meeting.msg) into a Markdown file preserving Subject, From, To, Date, Message-ID, and extract attachments.",
+      "expected_output": "A Markdown file with YAML frontmatter containing the metadata and a markdown body. Attachments saved under attachments/ and referenced in frontmatter.",
+      "files": ["meeting.msg"]
+    },
+    {
+      "id": 2,
+      "prompt": "Save this marketing email (campaign.msg) as Markdown. Prefer the HTML body converted to Markdown, and include inline images as extracted attachments.",
+      "expected_output": "Markdown with converted HTML body and extracted images listed in attachments.",
+      "files": ["campaign.msg"]
+    }
+  ]
+}

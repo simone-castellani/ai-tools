@@ -1,87 +1,162 @@
-# ai-tools
+# AI Skills Collection
 
-A curated collection of AI agents, skills, and tools for use with [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [OpenCode](https://opencode.ai), and other AI coding assistants.
+Questo repository raccoglie una selezione di agent skill riutilizzabili in altri progetti, compatibili con OpenCode, Claude Code e con il formato standard [Agent Skills](https://agentskills.io).
 
-Agents and skills conform to the standards expected by each tool and can be installed into your local environment with a single command using symbolic links, so updates to this repository are picked up automatically.
+Ogni skill vive in `skills/<nome-skill>/` e contiene almeno un file `SKILL.md`.
 
----
+## Skill disponibili
 
-## Contents
-
-### Agents (`agents/`)
-
-Sub-agents in [Claude Code format](https://docs.anthropic.com/en/docs/claude-code/sub-agents) (Markdown with YAML frontmatter). Each agent has a focused role and a restricted tool set.
-
-| Agent | Description |
+| Skill | Descrizione |
 |---|---|
-| `code-reviewer` | Reviews code for quality, style, and best practices |
-| `test-writer` | Writes unit, integration, and end-to-end tests |
-| `docs-writer` | Creates and updates technical documentation |
-| `security-auditor` | Audits code for security vulnerabilities |
+| `c4-architecture` | Genera documentazione architetturale con diagrammi C4 in Mermaid. |
+| `code-review` | Esegue code review strutturate e actionable su file modificati o pull request. |
+| `commit-work` | Aiuta a preparare commit Git puliti, ben separati e con messaggi Conventional Commits. |
+| `difficult-workplace-conversations` | Fornisce un framework per gestire conversazioni difficili sul lavoro. |
+| `doc-coauthoring` | Guida la scrittura collaborativa di documentazione, RFC, proposal e technical spec. |
+| `docx` | Crea, legge, modifica e converte documenti Word `.docx`. |
+| `explain-code` | Spiega codice e codebase in modo chiaro, adattando profondita e linguaggio al lettore. |
+| `humanizer` | Riscrive testi per renderli meno artificiali e piu naturali. |
+| `msg-to-md` | Converte email Outlook `.msg` in Markdown con metadata e allegati. |
+| `pptx` | Crea, legge e modifica presentazioni PowerPoint `.pptx`. |
+| `skill-creator` | Aiuta a creare, migliorare e valutare nuove skill. |
+| `writing-clearly-and-concisely` | Migliora testi tecnici e non tecnici rendendoli piu chiari e concisi. |
 
-### Skills (`skills/`)
+## Installazione con npx
 
-Reusable instruction sets in [OpenCode SKILL.md format](https://opencode.ai/docs/config/). Each skill lives in its own subdirectory.
+Il metodo consigliato per installare queste skill e usare [`npx skills`](https://www.npmjs.com/package/skills), cosi puoi installarle direttamente dal repository senza clonarlo manualmente.
 
-| Skill | Description |
-|---|---|
-| `git-commit` | Writes Conventional Commits–style commit messages |
-| `code-review` | Checklist and guidance for thorough code reviews |
-| `explain-code` | Explains code clearly to different audiences |
-
----
-
-## Installation
-
-Run the install script from the repository root:
+Per vedere prima l'elenco delle skill disponibili:
 
 ```bash
-./install.sh
+npx skills add simone-castellani/ai-tools --list
 ```
 
-This installs all agents and skills for **both Claude Code and OpenCode** at the **user level** (the default).
-
-### Options
-
-| Option | Values | Default | Description |
-|---|---|---|---|
-| `--tool` | `claude`, `opencode`, `all` | `all` | Which AI tool to install for |
-| `--scope` | `user`, `project` | `user` | User-level or current-project-level install |
-| `--dry-run` | – | – | Preview changes without applying them |
-
-### Examples
+### Installare tutte le skill
 
 ```bash
-# Install only Claude Code agents for the current user
-./install.sh --tool claude
+# Claude Code, livello progetto
+npx skills add simone-castellani/ai-tools --skill '*' -a claude-code
 
-# Install everything for the current project only
-./install.sh --scope project
+# Claude Code, livello utente
+npx skills add simone-castellani/ai-tools --skill '*' -a claude-code -g
 
-# Preview what would be installed for OpenCode
-./install.sh --tool opencode --dry-run
+# OpenCode, livello progetto
+npx skills add simone-castellani/ai-tools --skill '*' -a opencode
+
+# OpenCode, livello utente
+npx skills add simone-castellani/ai-tools --skill '*' -a opencode -g
+
+# Entrambi gli agent
+npx skills add simone-castellani/ai-tools --skill '*' -a claude-code -a opencode
 ```
 
-### Install locations
+Installazione non interattiva:
 
-| Tool | Scope | Agents | Skills |
-|---|---|---|---|
-| Claude Code | user | `~/.claude/agents/` | – |
-| Claude Code | project | `.claude/agents/` | – |
-| OpenCode | user | `~/.config/opencode/agents/` | `~/.config/opencode/skills/` |
-| OpenCode | project | `.opencode/agents/` | `.opencode/skills/` |
+```bash
+npx skills add simone-castellani/ai-tools --skill '*' -a claude-code -a opencode -y
+```
 
-Symbolic links are used, so any future changes you pull from this repository are reflected immediately without re-running the installer.
+### Installare una skill specifica
 
+Per installare una sola skill usa `--skill <nome-skill>`. I nomi validi corrispondono alle directory sotto `skills/`.
+
+```bash
+# Una skill specifica per Claude Code
+npx skills add simone-castellani/ai-tools --skill code-review -a claude-code
+
+# Una skill specifica per OpenCode
+npx skills add simone-castellani/ai-tools --skill docx -a opencode
+
+# Una skill specifica a livello utente
+npx skills add simone-castellani/ai-tools --skill humanizer -a claude-code -g
+
+# La stessa skill su piu agent
+npx skills add simone-castellani/ai-tools --skill writing-clearly-and-concisely -a claude-code -a opencode
+```
+
+## Installazione manuale
+
+Se preferisci mantenere una copia locale del repository e usare link simbolici, puoi installare manualmente una skill puntando alla relativa directory.
+
+### Claude Code
+
+Installazione per utente:
+
+```bash
+mkdir -p ~/.claude/skills
+ln -s "$(pwd)/skills/<nome-skill>" ~/.claude/skills/<nome-skill>
+```
+
+Installazione per progetto:
+
+```bash
+mkdir -p .claude/skills
+ln -s "$(pwd)/skills/<nome-skill>" .claude/skills/<nome-skill>
+```
+
+### OpenCode
+
+Installazione per utente:
+
+```bash
+mkdir -p ~/.config/opencode/skills
+ln -s "$(pwd)/skills/<nome-skill>" ~/.config/opencode/skills/<nome-skill>
+```
+
+Installazione per progetto:
+
+```bash
+mkdir -p .agents/skills
+ln -s "$(pwd)/skills/<nome-skill>" .agents/skills/<nome-skill>
+```
+
+## Aggiornamento
+
+Se usi `npx skills`, puoi controllare e applicare aggiornamenti con:
+
+```bash
+npx skills check
+npx skills update
+```
+
+Se usi link simbolici verso un clone locale del repository, gli aggiornamenti vengono recepiti automaticamente dopo un `git pull`.
+
+## Aggiungere una nuova skill
+
+1. Crea una nuova directory sotto `skills/`.
+2. Aggiungi un file `SKILL.md`.
+3. Inserisci nel file il frontmatter YAML con almeno `name` e `description`.
+
+Esempio minimo:
+
+```md
+---
+name: my-skill
+description: Quando e perche usare questa skill.
 ---
 
-## Adding your own agents or skills
+Istruzioni della skill.
+```
 
-1. **Agent**: create a new `.md` file in `agents/` with the required YAML frontmatter (`name`, `description`) and a Markdown system-prompt body. Re-run `./install.sh` to link it.
-2. **Skill**: create a new subdirectory under `skills/` containing a `SKILL.md` file. Re-run `./install.sh` to link it.
+## Struttura del repository
 
----
+```text
+skills/
+  <nome-skill>/
+    SKILL.md
+    README.md
+    references/
+    scripts/
+    assets/
+```
 
-## License
+## Risorse
+
+- [Agent Skills Specification](https://agentskills.io)
+- [skills](https://www.npmjs.com/package/skills)
+- [OpenCode Skills Documentation](https://opencode.ai/docs/skills)
+- [Claude Code Skills Documentation](https://code.claude.com/docs/en/skills)
+
+## Licenza
 
 MIT
