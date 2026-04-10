@@ -2,7 +2,10 @@
 name: explain-code
 description: Explain code clearly to different audiences, from beginners to experienced engineers. Use when a user asks what a piece of code does, how an algorithm works, or wants to understand an unfamiliar codebase.
 license: MIT
-allowed-tools: Read Grep Glob
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
 ---
 
 # Explain Code Skill

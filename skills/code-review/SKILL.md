@@ -2,7 +2,11 @@
 name: code-review
 description: Conduct thorough, actionable code reviews that improve code quality and knowledge sharing. Use when reviewing a pull request, a set of changed files, or any code submitted for feedback.
 license: MIT
-allowed-tools: Read Grep Glob Bash
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 ---
 
 # Code Review Skill

@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "commit-work": {
+      "source": "simone-castellani/ai-tools",
+      "sourceType": "github",
+      "computedHash": "8ba11bca8c3d3856beda56fc9764f2c19c79672a4849025a251b18d74a08c8bf"
+    }
+  }
+}

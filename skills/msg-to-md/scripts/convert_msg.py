@@ -119,12 +119,12 @@ def convert_msg(input_path: Path, output_dir: Path, save_attachments: bool = Fal
                 except Exception:
                     pass
 
-                attachments.append(
-                    {
-                        "path": str(saved_path.relative_to(output_dir)),
-                        "filename": saved_path.name,
-                    }
-                )
+            attachments.append(
+                {
+                    "path": str(saved_path.relative_to(output_dir)),
+                    "filename": saved_path.name,
+                }
+            )
     else:
         # Do not save attachments; only record filenames so frontmatter lists them.
         for i, att in enumerate(msg.attachments):
@@ -198,7 +198,9 @@ def convert_msg(input_path: Path, output_dir: Path, save_attachments: bool = Fal
     if save_attachments and attachments:
         print(f"Extracted {len(attachments)} attachment(s) to: {attach_dir}")
     elif not save_attachments and attachments:
-        print(f"Found {len(attachments)} attachment(s) but did not save them (use --save-attachments to extract).")
+        print(
+            f"Found {len(attachments)} attachment(s) but did not save them (use --save-attachments to extract)."
+        )
 
 
 def main():
@@ -222,7 +224,9 @@ def main():
     output_dir.mkdir(parents=True, exist_ok=True)
 
     try:
-        convert_msg(input_path, output_dir, save_attachments=bool(args.save_attachments))
+        convert_msg(
+            input_path, output_dir, save_attachments=bool(args.save_attachments)
+        )
     except Exception as e:
         print(f"Error converting message: {e}", file=sys.stderr)
         raise

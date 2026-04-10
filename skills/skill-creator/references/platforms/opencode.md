@@ -22,10 +22,50 @@ OpenCode uses the same format as the [Agent Skills standard](https://agentskills
 ---
 name: skill-name
 description: When and how to use this skill.
+allowed-tools:  # optional OpenCode extension
+  - Read
+  - Bash
 ---
 
 Skill instructions here.
 ```
+
+`name` and `description` are the portable core. OpenCode also supports the
+optional `allowed-tools` extension when a skill should advertise the workspace
+tools it expects to use.
+
+## OpenCode Frontmatter Extension
+
+`allowed-tools` may be written as either:
+
+- a single string: `allowed-tools: Read Bash`
+- a YAML list of strings
+
+For readability in docs, prefer Title Case names. Validation also accepts the
+canonical lowercase ids used by the runtime.
+
+### Supported Tool Names
+
+| Human-readable | Canonical id |
+|----------------|--------------|
+| `Read` | `read` |
+| `Glob` | `glob` |
+| `Grep` | `grep` |
+| `Bash` | `bash` |
+| `Task` | `task` |
+| `WebFetch` | `webfetch` |
+| `Skill` | `skill` |
+| `Question` | `question` |
+| `ApplyPatch` | `apply_patch` |
+| `TodoWrite` | `todowrite` |
+
+### Accepted Aliases
+
+- `AskUserQuestion` is accepted as a compatibility alias for `Question`
+- Lowercase forms such as `read` or `apply_patch` are also valid
+
+Do not use Claude-specific tool names like `create_file` or `str_replace` in
+OpenCode skills. They are not OpenCode tools.
 
 ## Spawning Test Runs
 
@@ -135,10 +175,15 @@ python -m scripts.package_skill <path/to/skill-folder>
 OpenCode provides these tools that may be useful during skill creation:
 
 - **Read** — Read files
-- **Write** — Create/overwrite files
-- **Edit** — Make targeted edits
+- **Glob** — Find files by pattern
+- **Grep** — Search file contents
 - **Bash** — Run shell commands
 - **Task** — Spawn subagents
 - **WebFetch** — Fetch web content
+- **Skill** — Load another skill
+- **Question** — Ask the user a short structured question
+- **ApplyPatch** — Edit files safely
+- **TodoWrite** — Track multi-step work
 
-When creating skills that use these tools, reference them by their OpenCode names.
+When creating skills that use these tools, prefer the Title Case names above in
+docs and `allowed-tools`.

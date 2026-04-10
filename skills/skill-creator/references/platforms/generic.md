@@ -48,8 +48,28 @@ Instructions for the agent to follow.
 | `name` | Yes | Lowercase, hyphens only, 1-64 chars, must match directory name |
 | `description` | Yes | What it does and when to trigger, max 1024 chars |
 | `license` | No | License name or reference |
-| `compatibility` | No | Environment requirements, max 500 chars |
+| `compatibility` | No | Environment/runtime requirements, max 500 chars |
 | `metadata` | No | Arbitrary key-value pairs |
+
+### Platform Extensions
+
+Portable skills should keep the core frontmatter above as small as possible.
+Platforms may add optional extension fields as needed.
+
+Example: OpenCode supports an optional `allowed-tools` field to document which
+workspace tools a skill expects to use. That field is valid for OpenCode, but
+it is not part of the portable minimum.
+
+```markdown
+---
+name: example-skill
+description: Explain how to do the task and when to trigger.
+compatibility: Requires Python 3.10+
+allowed-tools:
+  - Read
+  - Bash
+---
+```
 
 ## Without Subagent Support
 
@@ -72,10 +92,11 @@ If your platform doesn't support parallel agents:
 
 To make skills work across platforms:
 
-1. **Use standard frontmatter** — `name` and `description` only
+1. **Use standard frontmatter** — start with `name` and `description`, then add optional core fields only when they add value
 2. **Avoid platform-specific features** — No `claude -p`, no platform-specific tools
 3. **Keep scripts generic** — Python, Bash, or JavaScript that runs anywhere
-4. **Document dependencies** — Use `compatibility` field for requirements
+4. **Document dependencies** — Use `compatibility` for runtime/environment requirements
+5. **Use extensions sparingly** — Put platform-only fields like `allowed-tools` behind the relevant platform reference
 
 ## Validation
 

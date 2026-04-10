@@ -1,7 +1,10 @@
 ---
 name: difficult-workplace-conversations
 description: Structured approach to workplace conflicts, performance discussions, and challenging feedback using preparation-delivery-followup framework. Use when preparing for tough conversations, addressing conflicts, giving critical feedback, or navigating sensitive workplace discussions.
-allowed-tools: Read, Glob, Grep
+allowed-tools:
+  - Read
+  - Glob
+  - Grep
 ---
 
 # Difficult Conversations Skill
@@ -162,11 +165,6 @@ Escalate when:
 - **[Preparation Template](references/preparation-template.md)**: Worksheet for preparing before difficult conversations
 - **[Delivery Scripts](references/delivery-scripts.md)**: Opening lines, response handling, reframing techniques
 - **[Emotional Regulation](references/emotional-regulation.md)**: Managing your own emotions before and during
-
-## See Also
-
-- `feedback-mastery` skill - SBI feedback model (overlaps but more feedback-focused)
-- `professional-effective-communication` skill - General communication patterns
 
 ## Example Scenarios
 

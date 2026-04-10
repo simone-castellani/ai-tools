@@ -82,7 +82,8 @@ Based on the user interview, fill in these components:
 
 - **name**: Skill identifier (lowercase, hyphens only, must match directory name)
 - **description**: When to trigger, what it does. This is the primary triggering mechanism - include both what the skill does AND specific contexts for when to use it. All "when to use" info goes here, not in the body. Note: agents tend to "undertrigger" skills — to not use them when they'd be useful. To combat this, make skill descriptions a little bit "pushy". So for instance, instead of "How to build a simple fast dashboard to display internal data.", you might write "How to build a simple fast dashboard to display internal data. Make sure to use this skill whenever the user mentions dashboards, data visualization, internal metrics, or wants to display any kind of company data, even if they don't explicitly ask for a 'dashboard.'"
-- **compatibility**: Required tools, dependencies (optional, rarely needed)
+- **compatibility**: Runtime or dependency requirements (optional, rarely needed)
+- **allowed-tools**: Optional platform extension for tool constraints. Use only when the target platform supports it; for OpenCode, see `references/platforms/opencode.md`.
 - **the rest of the skill :)**
 
 ### Skill Writing Guide

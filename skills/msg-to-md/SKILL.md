@@ -8,8 +8,7 @@ description: |
   (for notes, docs, PRs, or knowledge bases). The skill includes a small
   standalone script to extract attachments and convert HTML bodies to Markdown.
 compatibility:
-  - python: '>=3.8'
-  - pip-packages: ['extract_msg', 'html2text']
+  Requires Python 3.8+ and the `extract_msg` and `html2text` packages.
 
 ---
 
